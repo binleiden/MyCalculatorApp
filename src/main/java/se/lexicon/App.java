@@ -26,8 +26,8 @@ public class App {
         System.out.println("5: Exit");
         int exit = 5;
         //User select which method to use for calculation of input nr1 and nr2
-        int i = 1;
-        while (true){
+        boolean startLoop = true;
+        while (startLoop){
             Scanner choice = new Scanner(System.in);
             int userChoice = choice.nextInt();
             Scanner firstNumber = new Scanner(System.in);
@@ -52,6 +52,9 @@ public class App {
                 case 4:
                     Object division = number1 / number2;
                     System.out.println(division);
+                    break;
+                case 5:
+                    startLoop = false;
                     break;
             }
         }
