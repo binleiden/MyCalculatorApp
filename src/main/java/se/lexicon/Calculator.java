@@ -8,8 +8,8 @@ public class Calculator {
             displayMenu();
             int userChoice = getUserChoice();
             if (userChoice >= 1 && userChoice <= 4) {
-                int number1 = getNumber("Enter first number: ");
-                int number2 = getNumber("Enter second number: ");
+                double number1 = getNumber("Enter first number: ");
+                double number2 = getNumber("Enter second number: ");
                 switch (userChoice) {
                     case 1:
                         performOperation(number1, number2, "addition");
@@ -38,8 +38,8 @@ public class Calculator {
         } while (startLoop);
     }
 
-    private static void performOperation(int number1, int number2, String operation) {
-        int result = 0;
+    private static void performOperation(double number1, double number2, String operation) {
+        double result = 0;
         switch (operation) {
             case "addition":
                 result = number1 + number2;
@@ -57,14 +57,14 @@ public class Calculator {
         System.out.println("Result of " + operation + " is: " + result);
     }
 
-    private static int getNumber(String message) {
+    private static double getNumber(String message) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(message);
-        return scanner.nextInt();
+        return scanner.nextDouble();
     }
 
     private static int getUserChoice() {
-        return getNumber("Enter your choice: ");
+        return (int) getNumber("Enter your choice: ");
     }
 
     private static void displayMenu() {
