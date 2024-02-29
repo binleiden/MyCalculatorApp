@@ -1,56 +1,73 @@
 package se.lexicon;
-
 import java.util.Scanner;
 
-/**
- * Hello world!
- */
 public class Calculator {
     public static void main(String[] args) {
-        //Enter number1 Scanner input store in value nr1
-        //Enter number2 Scanner input store in value nr2
-        //Calculate and display result and then go back to main menu
-        //int result;
-        //User select which method to use for calculation of input nr1 and nr2
-        boolean startLoop = true;
-        while (startLoop){
-            Calculator.displayMenu();
-            Scanner choice = new Scanner(System.in);
-            int userChoice = choice.nextInt();
-            Scanner firstNumber = new Scanner(System.in);
-            System.out.println("Enter first nr");
-            int number1 = firstNumber.nextInt();
-            Scanner secondNumber = new Scanner(System.in);
-            System.out.println("Enter second nr");
-            int number2 = secondNumber.nextInt();
-            switch (userChoice){
-                case 1:
-                    Object addition = number1 + number2;
-                    System.out.println(addition);
-                    break;
-                case 2:
-                    Object subtraction = number1 - number2;
-                    System.out.println(subtraction);
-                    break;
-                case 3:
-                    Object multiplication = number1 * number2;
-                    System.out.println(multiplication);
-                    break;
-                case 4:
-                    Object division = number1 / number2;
-                    System.out.println(division);
-                    break;
-                case 5:
-                    startLoop = false;
-                    break;
-                default:
-                    System.out.println("Select a number between 1 and 5");
+        boolean startLoop;
+        do {
+            displayMenu();
+            int userChoice = getUserChoice();
+            if (userChoice >= 1 && userChoice <= 4) {
+                int number1 = getNumber("Enter first number: ");
+                int number2 = getNumber("Enter second number: ");
+                switch (userChoice) {
+                    case 1:
+                        performOperation(number1, number2, "addition");
+                        break;
+                    case 2:
+                        performOperation(number1, number2, "subtraction");
+                        break;
+                    case 3:
+                        performOperation(number1, number2, "multiplication");
+                        break;
+                    case 4:
+                        if (number2 != 0) {
+                            performOperation(number1, number2, "division");
+                        } else {
+                            System.out.println("Error: Division by zero!");
+                        }
+                        break;
+                }
+                startLoop = true;
+            } else if (userChoice == 5) {
+                startLoop = false;
+            } else {
+                System.out.println("Select a number between 1 and 5");
+                startLoop = true;
             }
-        }
-
+        } while (startLoop);
     }
-    //Display input options
-    public static void displayMenu(){
+
+    private static void performOperation(int number1, int number2, String operation) {
+        int result = 0;
+        switch (operation) {
+            case "addition":
+                result = number1 + number2;
+                break;
+            case "subtraction":
+                result = number1 - number2;
+                break;
+            case "multiplication":
+                result = number1 * number2;
+                break;
+            case "division":
+                result = number1 / number2;
+                break;
+        }
+        System.out.println("Result of " + operation + " is: " + result);
+    }
+
+    private static int getNumber(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(message);
+        return scanner.nextInt();
+    }
+
+    private static int getUserChoice() {
+        return getNumber("Enter your choice: ");
+    }
+
+    private static void displayMenu() {
         System.out.println("My Calculator App");
         System.out.println("1: Addition");
         System.out.println("2: Subtraction");
